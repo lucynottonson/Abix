@@ -27,14 +27,15 @@ class Tree {
         this.h = h;
         this.baseH = h; 
         this.angle = 0;
+        this.trunkWidth = noise(this.x * 0.1) * 9 + 5;
     }
 
     grow() {
-        this.h = this.baseH + noise(this.x * 0.01, time) * 20;
+        this.h += noise(this.x * 0.01, time) * 0.2; 
     }
 
     sway() {
-        this.angle = noise(this.x * 0.01, time) * 0.1;
+        this.angle = noise(this.x * 0.2, time) * 0.1;
     }
 
     display() {
@@ -42,16 +43,34 @@ class Tree {
         translate(this.x, this.y);
         rotate(this.angle);
 
-        // Trunk
         stroke(100, 50, 0);
-        strokeWeight(4);
-        line(0, 0, 0, -this.h);
+        strokeWeight(this.trunkWidth);
+        noFill();
 
-        // Leaves
-        fill(30, 100 + noise(this.x * 0.2, time) * 100, 30);
+        let xOffset = noise(this.x * 0.2, time) * 10 - 5;
+
+        beginShape();
+        for (let i = 0; i <= this.h; i += 5) {
+            let xJitter = noise(this.x * 0.05, i * 0.02, time) * 20-5;
+            vertex(xOffset + xJitter, -i);
+        }
+        endShape();
+
+        fill(200, 50, 100); 
         noStroke();
-        ellipse(0, -this.h, 40, 40 + noise(this.x * 0.02, time) * 20);
+        this.drawFlower(0, -this.h, 20 + noise(this.x * 0.02, time) * 10, 6);
 
+        pop();
+    }
+
+    drawFlower(x, y, r, petals) {
+        push();
+        translate(x, y);
+        for (let i = 0; i < TWO_PI; i += TWO_PI / petals) {
+            let px = cos(i) * r;
+            let py = sin(i) * r;
+            ellipse(px, py, r, r * 1.5);
+        }
         pop();
     }
 }
