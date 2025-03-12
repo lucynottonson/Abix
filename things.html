@@ -5,8 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ABIX</title>
-    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <style>
+        h1 {
+            font-family: 'Atma', sans-serif;
+        }
+        p {
+            font-family: 'Tahoma', sans-serif;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 5px 10px;
+            font-size: 6px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: cyan;
+        }
+    </style>
 </head> 
 <body>
     <h1>Things</h1>
+    <p>This is the Things page.</p>
+
+    <model-viewer 
+        src="assets/metal.glb" 
+        alt="Model"
+        auto-rotate
+        camera-controls
+        shadow-intensity="0"
+        style="width: 200px; height: 200px;"
+        exposure="1.5"
+        environment-image="neutral">
+    </model-viewer>
+
+    <button onclick="window.location.href='index.html';">Back to Home</button>
 </body>
+</html>
